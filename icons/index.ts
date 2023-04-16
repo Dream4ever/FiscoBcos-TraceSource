@@ -10,8 +10,6 @@ import HeartIcon from './heart.svg'
 import EditIcon from './edit.svg'
 import TrashIcon from './trash.svg'
 import ForbiddenIcon from './forbidden.svg'
-import GithubIcon from './github.svg'
-import TwitterIcon from './twitter.svg'
 import MailIcon from './mail.svg'
 import CartIcon from './cart.svg'
 import ChatIcon from './chat.svg'
@@ -40,8 +38,6 @@ export {
   EditIcon,
   TrashIcon,
   ForbiddenIcon,
-  GithubIcon,
-  TwitterIcon,
   MailIcon,
   CartIcon,
   ChatIcon,
