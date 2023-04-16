@@ -32,11 +32,11 @@ function ForgotPassword() {
                 <Input className="mt-1" placeholder="Jane Doe" />
               </Label>
 
-            <Link href="/example" passHref={true}>
-              <Button tag={"button"} block className="mt-4">
-                Recover password
-              </Button>
-            </Link>
+              <Link href="/pages" passHref={true}>
+                <Button tag={"button"} block className="mt-4">
+                  Recover password
+                </Button>
+              </Link>
             </div>
           </main>
         </div>

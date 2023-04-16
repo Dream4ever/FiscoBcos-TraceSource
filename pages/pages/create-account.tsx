@@ -48,9 +48,9 @@ function CrateAccount() {
               </Label>
 
               <Link
-                  href='/example/login'
-                  passHref={true}
-                >
+                href='/pages/login'
+                passHref={true}
+              >
                 <Button block className="mt-4">
                   Create account
                 </Button>
@@ -68,7 +68,7 @@ function CrateAccount() {
               </Button>
 
               <p className="mt-4">
-                <Link href="/example/login">
+                <Link href="/pages/login">
                   <a
                     className="text-sm font-medium text-purple-600 dark:text-purple-400 hover:underline"
                   >

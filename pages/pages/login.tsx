@@ -45,7 +45,7 @@ function LoginPage() {
                 />
               </Label>
 
-              <Link href='/example' passHref={true}>
+              <Link href='/pages' passHref={true}>
                 <Button className='mt-4' block>
                   Log in
                 </Button>
@@ -63,14 +63,14 @@ function LoginPage() {
               </Button>
 
               <p className='mt-4'>
-                <Link href='/example/forgot-password'>
+                <Link href='/pages/forgot-password'>
                   <a className='text-sm font-medium text-purple-600 dark:text-purple-400 hover:underline'>
                     Forgot your password?
                   </a>
                 </Link>
               </p>
               <p className='mt-1'>
-                <Link href='/example/create-account'>
+                <Link href='/pages/create-account'>
                   <a className='text-sm font-medium text-purple-600 dark:text-purple-400 hover:underline'>
                     Create account
                   </a>

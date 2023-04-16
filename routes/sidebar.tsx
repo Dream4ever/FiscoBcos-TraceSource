@@ -4,7 +4,7 @@
  *
  */
 
-interface IRoute{
+interface IRoute {
   path?: string
   icon?: string
   name: string
@@ -13,7 +13,7 @@ interface IRoute{
   exact?: boolean
 }
 
-export function routeIsActive (pathname: String, route: IRoute): boolean {
+export function routeIsActive(pathname: String, route: IRoute): boolean {
   if (route.checkActive) {
     return route.checkActive(pathname, route)
   }
@@ -25,38 +25,38 @@ export function routeIsActive (pathname: String, route: IRoute): boolean {
 
 const routes: IRoute[] = [
   {
-    path: '/example', // the url
+    path: '/pages', // the url
     icon: 'HomeIcon', // the component being exported from icons/index.js
     name: 'Dashboard', // name that appear in Sidebar
     exact: true,
   },
   {
-    path: '/example/forms',
+    path: '/pages/forms',
     icon: 'FormsIcon',
     name: 'Forms',
   },
   {
-    path: '/example/cards',
+    path: '/pages/cards',
     icon: 'CardsIcon',
     name: 'Cards',
   },
   {
-    path: '/example/charts',
+    path: '/pages/charts',
     icon: 'ChartsIcon',
     name: 'Charts',
   },
   {
-    path: '/example/buttons',
+    path: '/pages/buttons',
     icon: 'ButtonsIcon',
     name: 'Buttons',
   },
   {
-    path: '/example/modals',
+    path: '/pages/modals',
     icon: 'ModalsIcon',
     name: 'Modals',
   },
   {
-    path: '/example/tables',
+    path: '/pages/tables',
     icon: 'TablesIcon',
     name: 'Tables',
   },
@@ -66,28 +66,28 @@ const routes: IRoute[] = [
     routes: [
       // submenu
       {
-        path: '/example/login',
+        path: '/pages/login',
         name: 'Login',
       },
       {
-        path: '/example/create-account',
+        path: '/pages/create-account',
         name: 'Create account',
       },
       {
-        path: '/example/forgot-password',
+        path: '/pages/forgot-password',
         name: 'Forgot password',
       },
       {
-        path: '/example/404',
+        path: '/pages/404',
         name: '404',
       },
       {
-        path: '/example/blank',
+        path: '/pages/blank',
         name: 'Blank',
       },
     ],
   },
 ]
 
-export type {IRoute}
+export type { IRoute }
 export default routes
