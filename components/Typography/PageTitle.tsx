@@ -1,6 +1,6 @@
 import React from 'react'
 
-interface IPageTitle{
+interface IPageTitle {
   children: React.ReactNode
 }
 

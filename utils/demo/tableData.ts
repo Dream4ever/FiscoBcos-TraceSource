@@ -7,7 +7,6 @@ interface ITableData{
   date: string
 }
 
-
 const tableData: ITableData[] =  [
   {
     avatar: 'https://randomuser.me/api/portraits/men/64.jpg',

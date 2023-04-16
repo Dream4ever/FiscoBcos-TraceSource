@@ -3,7 +3,6 @@ import { Transition, Backdrop } from '@roketid/windmill-react-ui'
 import SidebarContext from 'context/SidebarContext'
 import SidebarContent from './SidebarContent'
 
-
 function MobileSidebar() {
   const sidebarRef = useRef(null)
   const { isSidebarOpen, closeSidebar, saveScroll } = useContext(SidebarContext)

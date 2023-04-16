@@ -1,6 +1,6 @@
 import React from 'react'
 
-interface IChart{
+interface IChart {
   children: React.ReactNode
   title: string
 }

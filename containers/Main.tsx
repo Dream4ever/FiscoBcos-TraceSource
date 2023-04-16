@@ -1,6 +1,6 @@
 import React from 'react'
 
-interface IMain{
+interface IMain {
   children: React.ReactNode
 }
 

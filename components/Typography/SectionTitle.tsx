@@ -1,6 +1,6 @@
 import React from 'react'
 
-interface ISectionTitle{
+interface ISectionTitle {
   children: React.ReactNode
 }
 

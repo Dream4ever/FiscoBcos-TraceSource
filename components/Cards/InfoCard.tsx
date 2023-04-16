@@ -1,7 +1,7 @@
 import { ReactSVGElement } from 'react'
 import { Card, CardBody } from '@roketid/windmill-react-ui'
 
-interface IInfoCard{
+interface IInfoCard {
   title: string
   value: string
   children?: ReactSVGElement
