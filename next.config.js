@@ -17,6 +17,16 @@ module.exports = {
         destination: '/pages/login',
         permanent: false,
       },
+      {
+        source: '/sign/:path*',
+        destination: 'http://www.whxy.club:5004/:path*',
+        permanent: false,
+      },
+      {
+        source: '/contract/:path*',
+        destination: 'http://www.whxy.club:5002/:path*',
+        permanent: false,
+      },
     ]
   }
 }

@@ -1,12 +1,36 @@
-import React, { useContext } from 'react'
+import React, {
+  useContext,
+  useState,
+  useEffect,
+} from 'react'
 import Link from 'next/link'
 import Image from 'next/image'
 
+import { newUser, sign } from 'api/sign'
+
 import { Input, Label, Button, WindmillContext } from '@roketid/windmill-react-ui'
 
-function CrateAccount() {
+function CreateAccount() {
   const { mode } = useContext(WindmillContext)
+  const [userName, setUserName] = useState<string>('')
+
   const imgSource = mode === 'dark' ? '/assets/img/create-account-office-dark.jpeg' : '/assets/img/create-account-office.jpeg'
+
+  const signMessage = async () => {
+    const username = 'kt'
+    const signData = `I am ${username}\nI agree to log in and sign`
+    const { message }: any = await sign(username, signData)
+    console.log(message)
+  }
+
+  useEffect(() => {
+    signMessage()
+  }, [])
+
+  async function signUp({ userName }: { userName: string }) {
+    const result = await newUser(userName)
+    return result.data
+  }
 
   return (
     <div className="flex flex-col justify-center items-center min-h-screen p-6 bg-gray-50 dark:bg-gray-900">
@@ -24,12 +48,18 @@ function CrateAccount() {
           </div>
           <main className="flex items-center justify-center p-6 sm:p-12 md:w-1/2">
             <div className="w-full">
-              <h1 className="mb-4 text-xl font-semibold text-gray-700 dark:text-gray-200">
+              <h1 className="mb-8 text-xl font-semibold text-gray-700 dark:text-gray-200">
                 注册账户
               </h1>
               <Label>
                 <span>用户名</span>
-                <Input className="mt-1" type="text" placeholder="abcdef" />
+                <Input
+                  className="mt-1"
+                  value={userName}
+                  onChange={e => setUserName(e.target.value)}
+                  type="text"
+                  placeholder="请输入用户名"
+                />
               </Label>
 
               <Label className="mt-6" check>
@@ -39,14 +69,14 @@ function CrateAccount() {
                 </span>
               </Label>
 
-              <Link
-                href='/pages/login'
-                passHref={true}
+              <Button
+                block
+                disabled={!userName.trim()}
+                className="mt-8"
+                onClick={() => signUp({ userName })}
               >
-                <Button block className="mt-4">
-                  创建账户
-                </Button>
-              </Link>
+                创建账户
+              </Button>
 
               <hr className="my-8" />
 
@@ -67,4 +97,4 @@ function CrateAccount() {
   )
 }
 
-export default CrateAccount
+export default CreateAccount
