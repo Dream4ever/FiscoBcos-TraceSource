@@ -3,7 +3,6 @@ import Link from 'next/link'
 import Image from 'next/image'
 
 import { Label, Input, Button, WindmillContext } from '@roketid/windmill-react-ui'
-import { GithubIcon, TwitterIcon } from 'icons'
 
 function LoginPage() {
   const { mode } = useContext(WindmillContext)
@@ -25,55 +24,30 @@ function LoginPage() {
           </div>
           <main className='flex items-center justify-center p-6 sm:p-12 md:w-1/2'>
             <div className='w-full'>
-              <h1 className='mb-4 text-xl font-semibold text-gray-700 dark:text-gray-200'>
-                Login
+              <h1 className='mb-8 text-xl font-semibold text-gray-700 dark:text-gray-200'>
+                登录
               </h1>
               <Label>
-                <span>Email</span>
+                <span>用户名</span>
                 <Input
                   className='mt-1'
-                  type='email'
-                  placeholder='john@doe.com'
-                />
-              </Label>
-
-              <Label className='mt-4'>
-                <span>Password</span>
-                <Input
-                  className='mt-1'
-                  type='password'
-                  placeholder='***************'
+                  type='text'
+                  placeholder='abcdef'
                 />
               </Label>
 
               <Link href='/pages' passHref={true}>
-                <Button className='mt-4' block>
-                  Log in
+                <Button className='mt-8' block>
+                  登录
                 </Button>
               </Link>
 
               <hr className='my-8' />
 
-              <Button block layout='outline'>
-                <GithubIcon className='w-4 h-4 mr-2' aria-hidden='true' />
-                Github
-              </Button>
-              <Button className='mt-4' block layout='outline'>
-                <TwitterIcon className='w-4 h-4 mr-2' aria-hidden='true' />
-                Twitter
-              </Button>
-
-              <p className='mt-4'>
-                <Link href='/pages/forgot-password'>
-                  <a className='text-sm font-medium text-purple-600 dark:text-purple-400 hover:underline'>
-                    Forgot your password?
-                  </a>
-                </Link>
-              </p>
               <p className='mt-1'>
                 <Link href='/pages/create-account'>
                   <a className='text-sm font-medium text-purple-600 dark:text-purple-400 hover:underline'>
-                    Create account
+                    注册账户
                   </a>
                 </Link>
               </p>
