@@ -1,9 +1,9 @@
 import React from 'react'
 import { Button } from '@roketid/windmill-react-ui'
-import PageTitle from 'example/components/Typography/PageTitle'
-import SectionTitle from 'example/components/Typography/SectionTitle'
-import CTA from 'example/components/CTA'
-import Layout from 'example/containers/Layout'
+import PageTitle from 'components/Typography/PageTitle'
+import SectionTitle from 'components/Typography/SectionTitle'
+import CTA from 'components/CTA'
+import Layout from 'containers/Layout'
 import { HeartIcon, EditIcon } from 'icons'
 
 function Buttons() {

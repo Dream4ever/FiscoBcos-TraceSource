@@ -1,12 +1,12 @@
 import React from 'react'
 
 import { Card, CardBody } from '@roketid/windmill-react-ui'
-import PageTitle from 'example/components/Typography/PageTitle'
-import SectionTitle from 'example/components/Typography/SectionTitle'
-import CTA from 'example/components/CTA'
-import InfoCard from 'example/components/Cards/InfoCard'
-import RoundIcon from 'example/components/RoundIcon'
-import Layout from 'example/containers/Layout'
+import PageTitle from 'components/Typography/PageTitle'
+import SectionTitle from 'components/Typography/SectionTitle'
+import CTA from 'components/CTA'
+import InfoCard from 'components/Cards/InfoCard'
+import RoundIcon from 'components/RoundIcon'
+import Layout from 'containers/Layout'
 import { CartIcon, ChatIcon, MoneyIcon, PeopleIcon } from 'icons'
 
 function Cards() {
@@ -40,7 +40,7 @@ function Cards() {
         </InfoCard>
 
         <InfoCard title="Account balance" value="$ 46,760.89">
-        {/* @ts-ignore */}
+          {/* @ts-ignore */}
           <RoundIcon
             icon={MoneyIcon}
             iconColorClass="text-green-500 dark:text-green-100"
