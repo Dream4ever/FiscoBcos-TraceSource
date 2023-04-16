@@ -1,4 +1,5 @@
 /** @type {import('next').NextConfig} */
+const proxy = require('http-proxy-middleware')
 module.exports = {
   reactStrictMode: false,
   webpack(config) {
@@ -17,16 +18,39 @@ module.exports = {
         destination: '/pages/login',
         permanent: false,
       },
+    ]
+  },
+  async rewrites() {
+    return [
+      // Rewrite /sign to target
       {
         source: '/sign/:path*',
         destination: 'http://www.whxy.club:5004/:path*',
-        permanent: false,
       },
+      // Rewrite /contract to target
       {
         source: '/contract/:path*',
         destination: 'http://www.whxy.club:5002/:path*',
-        permanent: false,
       },
     ]
-  }
+  },
+  async serverMiddleware() {
+    // Configure proxy middleware
+    const proxyMiddlewareSign = proxy({
+      target: 'http://www.whxy.club:5004',
+      changeOrigin: true,
+      pathRewrite: { '^/sign': '' },
+    })
+
+    const proxyMiddlewareContract = proxy({
+      target: 'http://www.whxy.club:5002',
+      changeOrigin: true,
+      pathRewrite: { '^/contract': '' },
+    })
+
+    return [
+      { path: '/sign', handler: proxyMiddlewareSign },
+      { path: '/contract', handler: proxyMiddlewareContract },
+    ]
+  },
 }
