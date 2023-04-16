@@ -2,7 +2,6 @@ import React, { useContext } from 'react'
 import Link from 'next/link'
 import Image from 'next/image'
 
-import { GithubIcon, TwitterIcon } from 'icons'
 import { Input, Label, Button, WindmillContext } from '@roketid/windmill-react-ui'
 
 function CrateAccount() {
@@ -10,8 +9,9 @@ function CrateAccount() {
   const imgSource = mode === 'dark' ? '/assets/img/create-account-office-dark.jpeg' : '/assets/img/create-account-office.jpeg'
 
   return (
-    <div className="flex items-center min-h-screen p-6 bg-gray-50 dark:bg-gray-900">
-      <div className="flex-1 h-full max-w-4xl mx-auto overflow-hidden bg-white rounded-lg shadow-xl dark:bg-gray-800">
+    <div className="flex flex-col justify-center items-center min-h-screen p-6 bg-gray-50 dark:bg-gray-900">
+      <div className='mb-16 text-center text-4xl font-bold'>供应链溯源管理系统</div>
+      <div className="h-full w-1/2 mx-auto overflow-hidden bg-white rounded-lg shadow-xl dark:bg-gray-800">
         <div className="flex flex-col overflow-y-auto md:flex-row">
           <div className="relative h-32 md:h-auto md:w-1/2">
             <Image
@@ -25,25 +25,17 @@ function CrateAccount() {
           <main className="flex items-center justify-center p-6 sm:p-12 md:w-1/2">
             <div className="w-full">
               <h1 className="mb-4 text-xl font-semibold text-gray-700 dark:text-gray-200">
-                Create account
+                注册账户
               </h1>
               <Label>
-                <span>Email</span>
-                <Input className="mt-1" type="email" placeholder="john@doe.com" />
-              </Label>
-              <Label className="mt-4">
-                <span>Password</span>
-                <Input className="mt-1" placeholder="***************" type="password" />
-              </Label>
-              <Label className="mt-4">
-                <span>Confirm password</span>
-                <Input className="mt-1" placeholder="***************" type="password" />
+                <span>用户名</span>
+                <Input className="mt-1" type="text" placeholder="abcdef" />
               </Label>
 
               <Label className="mt-6" check>
                 <Input type="checkbox" />
                 <span className="ml-2">
-                  I agree to the <span className="underline">privacy policy</span>
+                  我同意<span className="underline">用户隐私协议</span>
                 </span>
               </Label>
 
@@ -52,27 +44,18 @@ function CrateAccount() {
                 passHref={true}
               >
                 <Button block className="mt-4">
-                  Create account
+                  创建账户
                 </Button>
               </Link>
 
               <hr className="my-8" />
-
-              <Button block layout="outline">
-                <GithubIcon className="w-4 h-4 mr-2" aria-hidden="true" />
-                Github
-              </Button>
-              <Button block className="mt-4" layout="outline">
-                <TwitterIcon className="w-4 h-4 mr-2" aria-hidden="true" />
-                Twitter
-              </Button>
 
               <p className="mt-4">
                 <Link href="/pages/login">
                   <a
                     className="text-sm font-medium text-purple-600 dark:text-purple-400 hover:underline"
                   >
-                    Already have an account? Login
+                    已经有账户了？点此登录
                   </a>
                 </Link>
               </p>
