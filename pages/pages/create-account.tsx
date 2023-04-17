@@ -6,7 +6,7 @@ import Link from 'next/link'
 import Image from 'next/image'
 import { useRouter } from 'next/router'
 
-import { newUser } from 'api/sign'
+import { newUser } from 'api/user'
 
 import { WindmillContext, Input, Label, Button } from '@roketid/windmill-react-ui'
 
@@ -19,7 +19,6 @@ function CreateAccount() {
 
   async function signUp({ userName }: { userName: string }) {
     const result = await newUser(userName)
-    console.log(result.data)
 
     if (result.message !== 'success') {
       alert('用户名已注册！')

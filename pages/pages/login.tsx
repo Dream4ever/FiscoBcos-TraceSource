@@ -1,12 +1,81 @@
-import React, { useContext } from 'react'
+import React, {
+  useContext,
+  useEffect,
+  useState,
+} from 'react'
 import Link from 'next/link'
 import Image from 'next/image'
+import { useRouter } from 'next/router'
 
-import { Label, Input, Button, WindmillContext } from '@roketid/windmill-react-ui'
+import {
+  fetchUserInfo,
+  isRegistered,
+  sign,
+} from 'api/user'
+
+import { Label, Input, Button, WindmillContext, Modal, ModalBody, ModalFooter } from '@roketid/windmill-react-ui'
 
 function LoginPage() {
   const { mode } = useContext(WindmillContext)
+  const [isUserExists, setIsUserExists] = useState<boolean>(false)
+  const [isModalOpen, setIsModalOpen] = useState<boolean>(false)
+  const router = useRouter()
+  const [userName, setUserName] = useState<string>('')
+  const [userInfo, setUserInfo] = useState<any>({})
+
+  useEffect(() => {
+    if (isUserExists) {
+      openModal()
+    }
+  }, [isUserExists])
+
   const imgSource = mode === 'dark' ? '/assets/img/login-office-dark.jpeg' : '/assets/img/login-office.jpg'
+
+  async function getUserInfo(userName: string) {
+    const result = await fetchUserInfo(userName)
+    // console.log(result.data)
+
+    if (result.message !== 'success') {
+      alert('用户名不存在！')
+      return
+    }
+
+    setUserInfo({
+      signUserId: result.data.signUserId,
+      address: result.data.address,
+    })
+    await checkIfRegistered(result.data.signUserId, result.data.address)
+  }
+
+  async function checkIfRegistered(signUserId: string, address: string) {
+    const result: any = await isRegistered(signUserId, address)
+    setIsUserExists(result[0])
+  }
+
+  function openModal() {
+    setIsModalOpen(true)
+  }
+
+  function closeModal() {
+    setIsUserExists(false)
+    setIsModalOpen(false)
+  }
+
+  async function doLogin() {
+    const result = await sign(userInfo.signUserId, 'test')
+    console.log(result)
+
+    if (result.message !== 'success') {
+      alert('登录验证失败！')
+      return
+    }
+
+    onSignedOk()
+  }
+
+  function onSignedOk() {
+    router.push('/pages/')
+  }
 
   return (
     <div className='flex flex-col justify-center items-center min-h-screen p-6 bg-gray-50 dark:bg-gray-900'>
@@ -32,15 +101,19 @@ function LoginPage() {
                 <Input
                   className='mt-1'
                   type='text'
-                  placeholder='abcdef'
+                  value={userName}
+                  onChange={e => setUserName(e.target.value)}
+                  placeholder='请输入用户名'
                 />
               </Label>
 
-              <Link href='/pages' passHref={true}>
-                <Button className='mt-8' block>
-                  登录
-                </Button>
-              </Link>
+              <Button
+                className='mt-8'
+                block
+                onClick={() => getUserInfo(userName)}
+              >
+                登录
+              </Button>
 
               <hr className='my-8' />
 
@@ -55,6 +128,17 @@ function LoginPage() {
           </main>
         </div>
       </div>
+      <Modal isOpen={isModalOpen} onClose={closeModal}>
+        <ModalBody>
+          确认登录？
+        </ModalBody>
+        <ModalFooter>
+          <Button className="w-full sm:w-auto" layout="outline" onClick={closeModal}>
+            取消
+          </Button>
+          <Button className="w-full sm:w-auto" onClick={doLogin}>确认</Button>
+        </ModalFooter>
+      </Modal>
     </div>
   );
 }
