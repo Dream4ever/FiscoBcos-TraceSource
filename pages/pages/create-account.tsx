@@ -1,35 +1,42 @@
 import React, {
   useContext,
   useState,
-  useEffect,
 } from 'react'
 import Link from 'next/link'
 import Image from 'next/image'
+import { useRouter } from 'next/router'
 
-import { newUser, sign } from 'api/sign'
+import { newUser } from 'api/sign'
 
-import { Input, Label, Button, WindmillContext } from '@roketid/windmill-react-ui'
+import { WindmillContext, Input, Label, Button } from '@roketid/windmill-react-ui'
 
 function CreateAccount() {
   const { mode } = useContext(WindmillContext)
+  const router = useRouter()
   const [userName, setUserName] = useState<string>('')
 
   const imgSource = mode === 'dark' ? '/assets/img/create-account-office-dark.jpeg' : '/assets/img/create-account-office.jpeg'
 
-  const signMessage = async () => {
-    const username = 'kt'
-    const signData = `I am ${username}\nI agree to log in and sign`
-    const { message }: any = await sign(username, signData)
-    console.log(message)
-  }
-
-  useEffect(() => {
-    signMessage()
-  }, [])
-
   async function signUp({ userName }: { userName: string }) {
     const result = await newUser(userName)
-    return result.data
+    console.log(result.data)
+
+    if (result.message !== 'success') {
+      alert('用户名已注册！')
+      return
+    }
+
+    saveUserInfo(result.data)
+    onAccountCreated()
+  }
+
+  function saveUserInfo(userInfo: any) {
+    localStorage.setItem('signUserId', userInfo.signUserId)
+    localStorage.setItem('address', userInfo.address)
+  }
+
+  function onAccountCreated() {
+    router.push('/pages/')
   }
 
   return (
