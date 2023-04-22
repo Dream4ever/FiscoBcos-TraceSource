@@ -13,6 +13,9 @@ import {
   IUserInfo,
   setRole,
 } from 'api/user'
+import {
+  saveUserInfo,
+} from 'utils/data'
 
 import { WindmillContext, Input, Label, Button, Dropdown, DropdownItem } from '@roketid/windmill-react-ui'
 
@@ -53,11 +56,6 @@ function CreateAccount() {
     await reqRole()
     // message: "Node already registered"
     onAccountCreated()
-  }
-
-  function saveUserInfo(userInfo: any) {
-    localStorage.setItem('signUserId', userInfo.signUserId)
-    localStorage.setItem('address', userInfo.address)
   }
 
   async function reqRole() {
