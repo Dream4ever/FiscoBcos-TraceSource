@@ -13,6 +13,7 @@ import {
   isRegistered,
   sign,
 } from 'api/user'
+import { saveUserInfo } from 'utils/data'
 
 import { Label, Input, Button, WindmillContext, Modal, ModalBody, ModalFooter } from '@roketid/windmill-react-ui'
 
@@ -54,6 +55,10 @@ function LoginPage() {
       address: result.data.address,
     })
     await checkIfRegistered(result.data.signUserId, result.data.address)
+    saveUserInfo({
+      signUserId: result.data.signUserId,
+      address: result.data.address,
+    })
   }
 
   async function checkIfRegistered(signUserId: string, address: string) {
