@@ -32,6 +32,15 @@ function LoginPage() {
 
   const imgSource = mode === 'dark' ? '/assets/img/login-office-dark.jpeg' : '/assets/img/login-office.jpg'
 
+  function openModal() {
+    setIsModalOpen(true)
+  }
+
+  function closeModal() {
+    setIsUserExists(false)
+    setIsModalOpen(false)
+  }
+
   async function getUserInfo(userName: string) {
     const result = await fetchUserInfo(userName) as IMyResponse
 
@@ -50,15 +59,6 @@ function LoginPage() {
   async function checkIfRegistered(signUserId: string, address: string) {
     const result: any = await isRegistered(signUserId, address)
     setIsUserExists(result[0])
-  }
-
-  function openModal() {
-    setIsModalOpen(true)
-  }
-
-  function closeModal() {
-    setIsUserExists(false)
-    setIsModalOpen(false)
   }
 
   async function doLogin() {
