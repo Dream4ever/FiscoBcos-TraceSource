@@ -9,10 +9,10 @@ import { useRouter } from 'next/router'
 
 import {
   fetchUserInfo,
+  IMyResponse,
   isRegistered,
   sign,
 } from 'api/user'
-import { IMyResponse } from 'utils/demo/request'
 
 import { Label, Input, Button, WindmillContext, Modal, ModalBody, ModalFooter } from '@roketid/windmill-react-ui'
 
