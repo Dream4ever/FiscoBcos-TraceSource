@@ -42,7 +42,7 @@ function Dashboard() {
           <span>当前用户角色：{roleList[roleId]}</span>
         </div>
 
-        <Dropdown className='bg-white' isOpen={isOpen} onClose={() => { }}>
+        <Dropdown className='z-10' isOpen={isOpen} onClose={() => { }}>
           <DropdownItem onClick={() => onRoleIdChange(0)}>
             <span>{roleList[0]}</span>
           </DropdownItem>
@@ -52,7 +52,7 @@ function Dashboard() {
         </Dropdown>
       </div>
 
-      <div className='mt-12'>
+      <div className='mt-6'>
         <Button disabled={roleId === roleList.length - 1} onClick={reqRole}>
           申请
         </Button>
