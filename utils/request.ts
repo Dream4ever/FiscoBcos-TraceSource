@@ -1,8 +1,4 @@
-import axios, { AxiosResponse } from 'axios';
-
-export interface IMyResponse extends AxiosResponse {
-  message: string
-}
+import axios from 'axios'
 
 export const reqUser = axios.create({
   baseURL: '/sign/WeBASE-Sign',
