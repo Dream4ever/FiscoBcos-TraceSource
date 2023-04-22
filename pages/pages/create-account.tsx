@@ -6,7 +6,7 @@ import Link from 'next/link'
 import Image from 'next/image'
 import { useRouter } from 'next/router'
 
-import { newUser } from 'api/user'
+import { IMyResponse } from 'utils/demo/request'
 
 import { WindmillContext, Input, Label, Button } from '@roketid/windmill-react-ui'
 
@@ -18,8 +18,7 @@ function CreateAccount() {
   const imgSource = mode === 'dark' ? '/assets/img/create-account-office-dark.jpeg' : '/assets/img/create-account-office.jpeg'
 
   async function signUp({ userName }: { userName: string }) {
-    const result = await newUser(userName)
-
+    const result = await newUser(userName) as IMyResponse
     if (result.message !== 'success') {
       alert('用户名已注册！')
       return

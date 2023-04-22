@@ -12,6 +12,7 @@ import {
   isRegistered,
   sign,
 } from 'api/user'
+import { IMyResponse } from 'utils/demo/request'
 
 import { Label, Input, Button, WindmillContext, Modal, ModalBody, ModalFooter } from '@roketid/windmill-react-ui'
 
@@ -32,8 +33,7 @@ function LoginPage() {
   const imgSource = mode === 'dark' ? '/assets/img/login-office-dark.jpeg' : '/assets/img/login-office.jpg'
 
   async function getUserInfo(userName: string) {
-    const result = await fetchUserInfo(userName)
-    // console.log(result.data)
+    const result = await fetchUserInfo(userName) as IMyResponse
 
     if (result.message !== 'success') {
       alert('用户名不存在！')
@@ -62,8 +62,7 @@ function LoginPage() {
   }
 
   async function doLogin() {
-    const result = await sign(userInfo.signUserId, 'test')
-    console.log(result)
+    const result = await sign(userInfo.signUserId, 'test') as IMyResponse
 
     if (result.message !== 'success') {
       alert('登录验证失败！')
