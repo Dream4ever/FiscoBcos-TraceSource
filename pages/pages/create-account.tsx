@@ -6,31 +6,63 @@ import Link from 'next/link'
 import Image from 'next/image'
 import { useRouter } from 'next/router'
 
-import { IMyResponse } from 'utils/demo/request'
+import {
+  newUser,
+  IMyResponse,
+  fetchUserInfo,
+  IUserInfo,
+  setRole,
+} from 'api/user'
 
-import { WindmillContext, Input, Label, Button } from '@roketid/windmill-react-ui'
+import { WindmillContext, Input, Label, Button, Dropdown, DropdownItem } from '@roketid/windmill-react-ui'
 
 function CreateAccount() {
   const { mode } = useContext(WindmillContext)
   const router = useRouter()
   const [userName, setUserName] = useState<string>('')
+  const [roleId, setRoleId] = useState<number>(2)
+  const [isOpen, setIsOpen] = useState(false)
 
   const imgSource = mode === 'dark' ? '/assets/img/create-account-office-dark.jpeg' : '/assets/img/create-account-office.jpeg'
+  const roleList = ['生产商', '流通商', '待选择']
+
+  function toggleDropdown() {
+    setIsOpen(!isOpen)
+  }
+
+  function onRoleIdChange(id: number) {
+    setRoleId(id)
+    setIsOpen(false)
+  }
 
   async function signUp({ userName }: { userName: string }) {
-    const result = await newUser(userName) as IMyResponse
-    if (result.message !== 'success') {
-      alert('用户名已注册！')
+    // 未选择角色
+    if (roleId === 2) {
+      alert('请选择角色')
       return
     }
 
-    saveUserInfo(result.data)
+    const result = await newUser(userName) as IMyResponse
+    if (result.message !== 'success') {
+      console.log('用户名已注册！')
+    }
+
+    const userInfo = await fetchUserInfo(userName) as IUserInfo
+    saveUserInfo({ signUserId: userInfo.data.signUserId, address: userInfo.data.address })
+
+    await reqRole()
+    // message: "Node already registered"
     onAccountCreated()
   }
 
   function saveUserInfo(userInfo: any) {
     localStorage.setItem('signUserId', userInfo.signUserId)
     localStorage.setItem('address', userInfo.address)
+  }
+
+  async function reqRole() {
+    const result = await setRole(userName, roleId) as IMyResponse
+    return result
   }
 
   function onAccountCreated() {
@@ -67,16 +99,26 @@ function CreateAccount() {
                 />
               </Label>
 
-              <Label className="mt-6" check>
-                <Input type="checkbox" />
-                <span className="ml-2">
-                  我同意<span className="underline">用户隐私协议</span>
-                </span>
-              </Label>
+              <div className="relative mt-8 flex flex-col flex-wrap">
+                <div className='flex items-center gap-x-4'>
+                  <Button onClick={toggleDropdown} aria-label="Notifications" aria-haspopup="true">
+                    选择用户角色
+                  </Button>
+                  <span>当前用户角色：{roleList[roleId]}</span>
+                </div>
+
+                <Dropdown className='z-10' isOpen={isOpen} onClose={() => { }}>
+                  <DropdownItem onClick={() => onRoleIdChange(0)}>
+                    <span>{roleList[0]}</span>
+                  </DropdownItem>
+                  <DropdownItem onClick={() => onRoleIdChange(1)}>
+                    <span>{roleList[1]}</span>
+                  </DropdownItem>
+                </Dropdown>
+              </div>
 
               <Button
                 block
-                disabled={!userName.trim()}
                 className="mt-8"
                 onClick={() => signUp({ userName })}
               >
