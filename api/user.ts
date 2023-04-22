@@ -1,5 +1,18 @@
-import { reqUser, reqContract } from 'utils/demo/request'
+import { AxiosResponse } from 'axios'
+import { reqUser, reqContract } from 'utils/request'
 import { Buffer } from 'buffer'
+
+export interface IMyResponse extends AxiosResponse {
+  message: string
+}
+
+export interface IUserInfo extends AxiosResponse {
+  message: string
+  data: {
+    signUserId: string
+    address: string
+  }
+}
 
 const payload = {
   groupId: 1,
@@ -31,8 +44,9 @@ export const newUser = (signUserId: string, appId = 'test') =>
     },
   })
 
-export const fetchUserInfo = (signUserId: string) =>
-  reqUser.get(`/user/${signUserId}/userInfo`)
+export const fetchUserInfo = (signUserId: string) => {
+  return reqUser.get(`/user/${signUserId}/userInfo`)
+}
 
 export const sign = (signUserId: string, encodedDataStr: string) => {
   encodedDataStr = Buffer.from(encodedDataStr).toString('hex')
@@ -49,5 +63,4 @@ export const isRegistered = (signUserId: string, addr: string) => {
 
 export const setRole = (signUserId: string, roleId: number) => {
   return interact(signUserId, 'registerNode', roleId)
-
 }
