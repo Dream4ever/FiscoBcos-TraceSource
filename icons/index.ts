@@ -24,6 +24,8 @@ import DropdownIcon from './dropdown.svg'
 import OutlinePersonIcon from './outlinePerson.svg'
 import OutlineCogIcon from './outlineCog.svg'
 import OutlineLogoutIcon from './outlineLogout.svg'
+import OkIcon from './ok.svg'
+import NoIcon from './no.svg'
 
 export {
   ButtonsIcon,
@@ -52,9 +54,11 @@ export {
   OutlinePersonIcon,
   OutlineCogIcon,
   OutlineLogoutIcon,
+  OkIcon,
+  NoIcon,
 }
 
-interface IIcon{
+interface IIcon {
   icon: string
   [key: string]: string | undefined
 }
