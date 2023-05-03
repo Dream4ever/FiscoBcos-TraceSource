@@ -33,7 +33,7 @@ const interact = (signUserId: string, funcName: string, funcParam?: string | num
     signUserId,
     funcName,
     ...(funcParam) && {
-    funcParam: [funcParam],
+      funcParam: [funcParam],
     },
   })
 }
@@ -65,4 +65,20 @@ export const isRegistered = (signUserId: string, addr: string) => {
 
 export const setRole = (signUserId: string, roleId: number) => {
   return interact(signUserId, 'registerNode', roleId)
+}
+
+export const getAllNode = () => {
+  return interact('admin', 'getAllNode')
+}
+
+export const getNodeStatus = (addr: string) => {
+  return interact('admin', 'nodes', addr)
+}
+
+export const approveNode = (addr: string) => {
+  return interact('admin', 'verifyNode', addr)
+}
+
+export const disapproveNode = (addr: string) => {
+  return interact('admin', 'cancelNode', addr)
 }

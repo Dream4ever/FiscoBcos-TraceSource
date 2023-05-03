@@ -27,7 +27,7 @@ const routes: IRoute[] = [
   {
     path: '/pages', // the url
     icon: 'HomeIcon', // the component being exported from icons/index.js
-    name: 'Dashboard', // name that appear in Sidebar
+    name: '用户审核', // name that appear in Sidebar
     exact: true,
   },
   {
