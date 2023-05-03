@@ -31,9 +31,9 @@ const routes: IRoute[] = [
     exact: true,
   },
   {
-    path: '/pages/forms',
+    path: '/pages/products',
     icon: 'FormsIcon',
-    name: 'Forms',
+    name: '产品管理',
   },
   {
     path: '/pages/cards',
