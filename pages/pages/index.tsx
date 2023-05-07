@@ -36,10 +36,6 @@ function Dashboard() {
   const getAllNodeReq = async () => {
     const result = await getAllNode()
     const users = JSON.parse(result as any).filter((node: any) => node[1] !== 2)
-    for (let i = 0; i < users.length; i++) {
-      const userStatus: any = await getNodeStatus(users[i][0])
-      users[i][2] = (userStatus[2] === 'true')
-    }
     setAllNodes(users)
   }
 
