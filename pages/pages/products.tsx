@@ -1,4 +1,4 @@
-import React, { useState } from 'react'
+import React, { useEffect, useState } from 'react'
 
 import {
   Input,
@@ -17,10 +17,11 @@ import Layout from 'containers/Layout'
 import {
   IProduct,
   addProduct,
+  getAllProducts,
 } from 'api/user'
 
 function Forms() {
-  const [products, setProducts] = useState<any[]>([])
+  const [products, setProducts] = useState<string[]>([])
   const [product, setProduct] = useState<IProduct>({
     productName: '',
     producerName: '',
@@ -30,8 +31,26 @@ function Forms() {
     ingredients: [],
   })
 
+  useEffect(() => {
+    getAllProds()
+  }, [])
+
+  async function getAllProds () {
+    const prods = await getAllProducts() as any
+    console.log(JSON.parse(prods[0]))
+    setProducts(parseStringAsArray(prods[0]))
+  }
+
+  const parseStringAsArray = (str: string) => {
+    return str
+      .replace(/\[(.*)\]/, '$1')
+      .split(',')
+      .map(i => i.trim())
+  }
+
   async function handleAddProduct() {
-    const result = await addProduct(product)
+    await addProduct(product)
+    await getAllProds()
   }
 
   return (
@@ -116,10 +135,7 @@ function Forms() {
         <Table>
           <TableHeader>
             <tr>
-              <TableCell>节点地址</TableCell>
-              <TableCell>用户角色</TableCell>
-              <TableCell>审核状态</TableCell>
-              <TableCell>操作</TableCell>
+              <TableCell>产品地址</TableCell>
             </tr>
           </TableHeader>
           <TableBody>
@@ -127,17 +143,8 @@ function Forms() {
               <TableRow key={i}>
                 <TableCell>
                   <div className="flex items-center text-sm">
-                    <p className="font-semibold"></p>
+                    {prod}
                   </div>
-                </TableCell>
-                <TableCell>
-                  <span className="text-sm"></span>
-                </TableCell>
-                <TableCell>
-                  <span className="text-sm"></span>
-                </TableCell>
-                <TableCell>
-                  <span className='text-sm'>已处理</span>
                 </TableCell>
               </TableRow>
             ))}

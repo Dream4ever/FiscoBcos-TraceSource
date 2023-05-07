@@ -411,3 +411,7 @@ export const disapproveNode = (addr: string) => {
 export const addProduct = (product: IProduct) => {
   return interact('admin', 'addProduct', product)
 }
+
+export const getAllProducts = () => {
+  return interact('admin', 'getAllProductHash')
+}
