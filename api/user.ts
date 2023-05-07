@@ -345,7 +345,7 @@ const interact = (signUserId: string, funcName: string, funcParam?: string | num
     ...payload,
     signUserId,
     funcName,
-    ...(funcParam) && {
+    ...(funcParam !== undefined) && {
       funcParam: [funcParam],
     },
   })
