@@ -14,6 +14,15 @@ export interface IUserInfo extends AxiosResponse {
   }
 }
 
+export interface IProduct {
+  productName: string
+  producerName: string
+  productionDate: string
+  location: string
+  batchNumber: string
+  ingredients: string[]
+}
+
 const payload = {
   groupId: 1,
   contractName: "SupplyChain",
@@ -340,13 +349,16 @@ const payload = {
   "cnsName": ""
 }
 
-const interact = (signUserId: string, funcName: string, funcParam?: string | number) => {
+const interact = (signUserId: string, funcName: string, funcParam?: string | number | IProduct) => {
   return reqContract.post('/trans/handleWithSign', {
     ...payload,
     signUserId,
     funcName,
-    ...(funcParam !== undefined) && {
+    ...(typeof funcParam === 'string' || typeof funcParam === 'number') && {
       funcParam: [funcParam],
+    },
+    ...(typeof funcParam === 'object') && {
+      funcParam: Object.values(funcParam),
     },
   })
 }
@@ -394,4 +406,8 @@ export const approveNode = (addr: string) => {
 
 export const disapproveNode = (addr: string) => {
   return interact('admin', 'cancelNode', addr)
+}
+
+export const addProduct = (product: IProduct) => {
+  return interact('admin', 'addProduct', product)
 }
