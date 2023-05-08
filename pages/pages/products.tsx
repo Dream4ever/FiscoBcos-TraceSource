@@ -18,6 +18,8 @@ import {
   IProduct,
   addProduct,
   getAllProducts,
+  transferProduct,
+  verifyProduct,
 } from 'api/user'
 
 function Forms() {
@@ -51,6 +53,14 @@ function Forms() {
   async function handleAddProduct() {
     await addProduct(localStorage.getItem('signUserId')!, product)
     await getAllProds()
+  }
+
+  const transfer = async (addr: string) => {
+    if (localStorage.getItem('signUserId') === 'test_1') {
+      await transferProduct(localStorage.getItem('signUserId')!, ['0x06dfaaa7efe367de45a350986fa841dfda31cdf8', addr])
+    } else if (localStorage.getItem('signUserId') === 'test_2') {
+      await verifyProduct(localStorage.getItem('signUserId')!, addr)
+    }
   }
 
   return (
@@ -136,6 +146,7 @@ function Forms() {
           <TableHeader>
             <tr>
               <TableCell>产品地址</TableCell>
+              <TableCell>操作</TableCell>
             </tr>
           </TableHeader>
           <TableBody>
@@ -144,6 +155,13 @@ function Forms() {
                 <TableCell>
                   <div className="flex items-center text-sm">
                     {prod}
+                  </div>
+                </TableCell>
+                <TableCell>
+                  <div className="flex items-center text-sm">
+                    <Button onClick={() => transfer(prod)} layout="outline" size="small" aria-label="Ok">
+                      <span>{localStorage.getItem('signUserId') === 'test_1' ? '交易' : '验证'}</span>
+                    </Button>
                   </div>
                 </TableCell>
               </TableRow>

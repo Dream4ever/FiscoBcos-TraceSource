@@ -451,7 +451,7 @@ const payload = {
 
 const interact = (
   signUserId: string,
-  funcName: string, funcParam?: string | number | IProduct) => {
+  funcName: string, funcParam?: string | string[] | number | IProduct) => {
   return reqContract.post('/trans/handleWithSign', {
     ...payload,
     signUserId,
@@ -459,7 +459,10 @@ const interact = (
     ...(typeof funcParam === 'string' || typeof funcParam === 'number') && {
       funcParam: [funcParam],
     },
-    ...(typeof funcParam === 'object') && {
+    ...(Array.isArray(funcParam)) && {
+      funcParam,
+    },
+    ...(typeof funcParam === 'object' && !Array.isArray(funcParam)) && {
       funcParam: Object.values(funcParam),
     },
   })
@@ -514,8 +517,18 @@ export const addProduct = (signUserId: string, product: IProduct) => {
   return interact(signUserId, 'addProduct', product)
 }
 
-}
-
 export const getAllProducts = () => {
   return interact('admin', 'getAllProductHash')
+}
+
+export const getProduct = (productHash: string) => {
+  return interact('admin', 'getProduct', productHash)
+}
+
+export const transferProduct = (signUserId: string, productHash: string[]) => {
+  return interact(signUserId, 'transferProduct', productHash)
+}
+
+export const verifyProduct = (signUserId: string, productHash: string) => {
+  return interact(signUserId, 'verifiedProduct', productHash)
 }
