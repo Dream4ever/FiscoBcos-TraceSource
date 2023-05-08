@@ -15,7 +15,6 @@ import {
 
 import {
   getAllNode,
-  getNodeStatus,
   approveNode,
   disapproveNode,
 } from 'api/user'
