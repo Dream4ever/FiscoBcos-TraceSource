@@ -35,58 +35,58 @@ const routes: IRoute[] = [
     icon: 'FormsIcon',
     name: '产品管理',
   },
-  {
-    path: '/pages/cards',
-    icon: 'CardsIcon',
-    name: 'Cards',
-  },
-  {
-    path: '/pages/charts',
-    icon: 'ChartsIcon',
-    name: 'Charts',
-  },
-  {
-    path: '/pages/buttons',
-    icon: 'ButtonsIcon',
-    name: 'Buttons',
-  },
-  {
-    path: '/pages/modals',
-    icon: 'ModalsIcon',
-    name: 'Modals',
-  },
-  {
-    path: '/pages/tables',
-    icon: 'TablesIcon',
-    name: 'Tables',
-  },
-  {
-    icon: 'PagesIcon',
-    name: 'Pages',
-    routes: [
-      // submenu
-      {
-        path: '/pages/login',
-        name: 'Login',
-      },
-      {
-        path: '/pages/create-account',
-        name: 'Create account',
-      },
-      {
-        path: '/pages/forgot-password',
-        name: 'Forgot password',
-      },
-      {
-        path: '/pages/404',
-        name: '404',
-      },
-      {
-        path: '/pages/blank',
-        name: 'Blank',
-      },
-    ],
-  },
+  // {
+  //   path: '/pages/cards',
+  //   icon: 'CardsIcon',
+  //   name: 'Cards',
+  // },
+  // {
+  //   path: '/pages/charts',
+  //   icon: 'ChartsIcon',
+  //   name: 'Charts',
+  // },
+  // {
+  //   path: '/pages/buttons',
+  //   icon: 'ButtonsIcon',
+  //   name: 'Buttons',
+  // },
+  // {
+  //   path: '/pages/modals',
+  //   icon: 'ModalsIcon',
+  //   name: 'Modals',
+  // },
+  // {
+  //   path: '/pages/tables',
+  //   icon: 'TablesIcon',
+  //   name: 'Tables',
+  // },
+  // {
+  //   icon: 'PagesIcon',
+  //   name: 'Pages',
+  //   routes: [
+  //     // submenu
+  //     {
+  //       path: '/pages/login',
+  //       name: 'Login',
+  //     },
+  //     {
+  //       path: '/pages/create-account',
+  //       name: 'Create account',
+  //     },
+  //     {
+  //       path: '/pages/forgot-password',
+  //       name: 'Forgot password',
+  //     },
+  //     {
+  //       path: '/pages/404',
+  //       name: '404',
+  //     },
+  //     {
+  //       path: '/pages/blank',
+  //       name: 'Blank',
+  //     },
+  //   ],
+  // },
 ]
 
 export type { IRoute }
