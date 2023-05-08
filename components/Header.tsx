@@ -1,4 +1,4 @@
-import { useContext, useState } from 'react'
+import { useContext, useEffect, useState } from 'react'
 import SidebarContext from 'context/SidebarContext'
 import {
   SearchIcon,
@@ -11,6 +11,7 @@ import {
   OutlineLogoutIcon,
 } from 'icons'
 import { Avatar, Badge, Input, Dropdown, DropdownItem, WindmillContext } from '@roketid/windmill-react-ui'
+import { useRouter } from 'next/router'
 
 function Header() {
   const { mode, toggleMode } = useContext(WindmillContext)
@@ -18,6 +19,13 @@ function Header() {
 
   const [isNotificationsMenuOpen, setIsNotificationsMenuOpen] = useState(false)
   const [isProfileMenuOpen, setIsProfileMenuOpen] = useState(false)
+  const [userName, setUserName] = useState('')
+
+  const router = useRouter()
+
+  useEffect(() => {
+    setUserName(localStorage.getItem('signUserId')!)
+  }, [])
 
   function handleNotificationsClick() {
     setIsNotificationsMenuOpen(!isNotificationsMenuOpen)
@@ -25,6 +33,12 @@ function Header() {
 
   function handleProfileClick() {
     setIsProfileMenuOpen(!isProfileMenuOpen)
+  }
+
+  function logOut() {
+    localStorage.removeItem('signUserId')
+    localStorage.removeItem('address')
+    router.push('/pages/login')
   }
 
   return (
@@ -122,13 +136,13 @@ function Header() {
             >
               <DropdownItem tag="a" href="#">
                 <OutlinePersonIcon className="w-4 h-4 mr-3" aria-hidden="true" />
-                <span>Profile</span>
+                <span>{userName}</span>
               </DropdownItem>
-              <DropdownItem tag="a" href="#">
+              {/* <DropdownItem tag="a" href="#">
                 <OutlineCogIcon className="w-4 h-4 mr-3" aria-hidden="true" />
                 <span>Settings</span>
-              </DropdownItem>
-              <DropdownItem onClick={() => alert('Log out!')}>
+              </DropdownItem> */}
+              <DropdownItem onClick={logOut}>
                 <OutlineLogoutIcon className="w-4 h-4 mr-3" aria-hidden="true" />
                 <span>Log out</span>
               </DropdownItem>
