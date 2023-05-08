@@ -33,11 +33,11 @@ function Forms() {
 
   useEffect(() => {
     getAllProds()
+  // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [])
 
   async function getAllProds () {
     const prods = await getAllProducts() as any
-    console.log(JSON.parse(prods[0]))
     setProducts(parseStringAsArray(prods[0]))
   }
 
@@ -49,7 +49,7 @@ function Forms() {
   }
 
   async function handleAddProduct() {
-    await addProduct(product)
+    await addProduct(localStorage.getItem('signUserId')!, product)
     await getAllProds()
   }
 

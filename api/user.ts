@@ -510,8 +510,10 @@ export const disapproveNode = (addr: string) => {
   return interact('admin', 'cancelNode', addr)
 }
 
-export const addProduct = (product: IProduct) => {
-  return interact('admin', 'addProduct', product)
+export const addProduct = (signUserId: string, product: IProduct) => {
+  return interact(signUserId, 'addProduct', product)
+}
+
 }
 
 export const getAllProducts = () => {
