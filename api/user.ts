@@ -24,13 +24,13 @@ export interface IProduct {
 }
 
 const payload = {
-  groupId: 1,
-  contractName: "SupplyChain",
-  contractPath: "/SupplyChain",
-  version: "",
-  funcName: "isRegister",
-  contractAddress: "0xb00cfbddd65d369be27626d88f2f29fbdf514b11",
-  contractAbi: [
+  "groupId": 1,
+  "contractName": "SupplyChain",
+  "contractPath": "/SupplyChain",
+  "version": "",
+  "funcName": "isRegister",
+  "contractAddress": "0x2193b14e975b761323f6b774e906765ebf815770",
+  "contractAbi": [
     {
       "inputs": [],
       "stateMutability": "nonpayable",
@@ -233,6 +233,106 @@ const payload = {
           "internalType": "uint256[]",
           "name": "",
           "type": "uint256[]"
+        }
+      ],
+      "stateMutability": "view",
+      "type": "function"
+    },
+    {
+      "inputs": [
+        {
+          "internalType": "uint256",
+          "name": "_productHash",
+          "type": "uint256"
+        }
+      ],
+      "name": "getProduct",
+      "outputs": [
+        {
+          "components": [
+            {
+              "internalType": "string",
+              "name": "productName",
+              "type": "string"
+            },
+            {
+              "internalType": "string",
+              "name": "producerName",
+              "type": "string"
+            },
+            {
+              "internalType": "string",
+              "name": "productionDate",
+              "type": "string"
+            },
+            {
+              "internalType": "string",
+              "name": "location",
+              "type": "string"
+            },
+            {
+              "internalType": "string",
+              "name": "batchNumber",
+              "type": "string"
+            },
+            {
+              "internalType": "string[]",
+              "name": "ingredients",
+              "type": "string[]"
+            }
+          ],
+          "internalType": "struct SupplyChain.ProductInfo",
+          "name": "productInfo",
+          "type": "tuple"
+        },
+        {
+          "internalType": "address",
+          "name": "owner",
+          "type": "address"
+        },
+        {
+          "internalType": "bool",
+          "name": "paused",
+          "type": "bool"
+        },
+        {
+          "components": [
+            {
+              "components": [
+                {
+                  "internalType": "address",
+                  "name": "nodeAddress",
+                  "type": "address"
+                },
+                {
+                  "internalType": "enum SupplyChain.NodeType",
+                  "name": "nodeType",
+                  "type": "uint8"
+                },
+                {
+                  "internalType": "bool",
+                  "name": "isRegistered",
+                  "type": "bool"
+                }
+              ],
+              "internalType": "struct SupplyChain.Node",
+              "name": "node",
+              "type": "tuple"
+            },
+            {
+              "internalType": "bool",
+              "name": "isVerified",
+              "type": "bool"
+            },
+            {
+              "internalType": "uint256",
+              "name": "timestamp",
+              "type": "uint256"
+            }
+          ],
+          "internalType": "struct SupplyChain.ChainTrace[]",
+          "name": "chainTraces",
+          "type": "tuple[]"
         }
       ],
       "stateMutability": "view",
