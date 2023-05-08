@@ -449,7 +449,9 @@ const payload = {
   "cnsName": ""
 }
 
-const interact = (signUserId: string, funcName: string, funcParam?: string | number | IProduct) => {
+const interact = (
+  signUserId: string,
+  funcName: string, funcParam?: string | number | IProduct) => {
   return reqContract.post('/trans/handleWithSign', {
     ...payload,
     signUserId,
